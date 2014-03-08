@@ -4,5 +4,5 @@ gem 'sinatra'
 group :development do
   gem 'shotgun'
   gem 'rspec'
-  gem 'capybara-rspec'
+  gem 'capybara'
 end
