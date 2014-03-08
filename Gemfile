@@ -3,4 +3,5 @@ gem 'sinatra'
 
 group :development do
   gem 'shotgun'
+  gem 'rspec'
 end
