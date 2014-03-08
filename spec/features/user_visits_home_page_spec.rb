@@ -6,6 +6,11 @@ describe "Root path", :type => :feature do
     last_response.should be_successful
   end
 
+  it "should have a file uploader form" do
+    visit '/'
+    expect(page).to have_css('form[method="post"]')
+  end
+
   it "should have an file chooser button" do
     visit '/'
     expect(page).to have_field('video', :type => 'file')
