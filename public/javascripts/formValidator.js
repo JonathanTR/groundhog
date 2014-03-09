@@ -1,18 +1,15 @@
 var validateFilePresent = function(){
   var $fileChooser = $("input[name='video']")
-  $("#video-uploader").on("submit", function(e){
-    e.preventDefault()
+  var $form = $("#video-uploader")
+  $form.on("submit", function(e){
     if($fileChooser.val() == ""){
+      e.preventDefault()
       $(".error").remove()
       $fileChooser.before("<div class='error'>Please choose a file to upload.</div>")
     }
   })
 }
 
-var attachValidations = function(){
-  this.validateFilePresent()
-}
-
 $(document).ready(function(){
-  attachValidations()
+  validateFilePresent()
 })
