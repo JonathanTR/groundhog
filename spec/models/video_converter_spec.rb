@@ -12,7 +12,7 @@ describe "VideoConverter" do
   end
 
   it "should accept a video path" do
-    expect(VideoConverter.convert_to_gif(video_path)).not_to raise_error
+    expect(VideoConverter.convert_to_gif(temp_output_path, video_path)).not_to raise_error
   end
 
   it "should copy the video file to the temp_input folder" do
