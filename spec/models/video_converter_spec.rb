@@ -6,7 +6,7 @@ describe "VideoConverter" do
   let(:temp_input_path){"public/temp_input/#{video_name}"}
 
   it "should accept a video path" do
-    expect(VideoConverter.makeGif(video_path)).not_to raise_error
+    expect(VideoConverter.convert_to_gif(video_path)).not_to raise_error
   end
 
   it "should copy the video file to the temp_input folder" do

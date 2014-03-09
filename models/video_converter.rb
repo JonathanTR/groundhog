@@ -4,7 +4,7 @@ class VideoConverter
     File.open(target_path, 'w'){|f| f.write File.read(file_path)}
   end
 
-  def self.makeGif(video_path)
+  def self.convert_to_gif(source_path)
   end
   
 end
