@@ -1,4 +1,5 @@
 require 'sinatra'
+require_relative 'models/init'
 
 get '/' do
   erb :index
