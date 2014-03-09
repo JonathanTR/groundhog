@@ -25,6 +25,7 @@ feature "User clicks upload" do
     click_button("Upload!")
     expect(page.status_code).to be(406)
     expect(page).to have_content('Please upload a valid filetype.')
+    expect(File.exist?('public/temp_input/invalid.txt')).to be_false
   end
 
   scenario "the file should be saved to a temp_input folder" do
