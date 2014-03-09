@@ -27,4 +27,11 @@ feature "User clicks upload" do
     expect(page).to have_content('Please upload a valid filetype.')
   end
 
+  scenario "the file should be saved to a temp_input folder" do
+    page.attach_file('video', 'spec/resources/grasshopper_test.mp4')
+    click_button("Upload!")
+    expect(File.exist?(temp_input_path)).to be_true
+    File.delete(temp_input_path)
+  end
+
 end

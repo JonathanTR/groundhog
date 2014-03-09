@@ -10,5 +10,11 @@ post '/upload' do
   if filetype != "application/mp4"
     status 406
     erb :error_406
+  else
+    video_file = params["video"][:tempfile]
+    video_name = params["video"][:filename]
+    target_path = "public/temp_input/#{video_name}"
+    VideoConverter.copy_to_temp_input(target_path, video_file.path)
+    redirect '/'
   end
 end
