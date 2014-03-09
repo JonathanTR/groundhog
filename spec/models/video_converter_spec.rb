@@ -14,6 +14,12 @@ describe "VideoConverter" do
     original = File.read(video_path)
     result = File.read(temp_input_path)
     expect(original).to eq(result)
-    File.delete(temp_input_path)
+  end
+
+  it "should output a gif file to the temp_output folder" do
+    VideoConverter.copy_to_temp_input(temp_input_path, video_path)
+    VideoConverter.convert_to_gif(temp_output_path, temp_input_path)
+    source = File.read(temp_input_path)
+    expect(File.exist?(temp_output_path)).to be_true
   end
 end
