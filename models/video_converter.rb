@@ -1,3 +1,5 @@
+require 'streamio-ffmpeg'
+
 class VideoConverter
 
   def self.copy_to_temp_input(target_path, file_path)
