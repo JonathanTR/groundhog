@@ -43,3 +43,9 @@ form input {
   border-bottom: 2px solid #7C7C7C;
   color: #272722;
 }
+
+.gif-result a {
+  text-decoration: none;
+  font-size: 1.2em;
+  color: #27ae60;
+}
