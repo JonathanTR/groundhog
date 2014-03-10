@@ -2,8 +2,8 @@ require 'spec_helper'
 
 feature "User clicks upload" do
   let(:video_path){'spec/resources/grasshopper_test.mp4'}
-  let(:video_name){'grasshopper_test.mp4'}
-  let(:temp_input_path){"public/temp_input/#{video_name}"}
+  let(:temp_input_path){"public/temp_input/grasshopper_test.mp4"}
+  let(:temp_output_path){"public/temp_output/grasshopper_test.gif"}
 
   before :each do
     visit '/'
@@ -31,8 +31,16 @@ feature "User clicks upload" do
   scenario "the file should be saved to a temp_input folder" do
     page.attach_file('video', 'spec/resources/grasshopper_test.mp4')
     click_button("Upload!")
+    puts temp_input_path
     expect(File.exist?(temp_input_path)).to be_true
     File.delete(temp_input_path)
+  end
+
+  scenario "the file should be converted to a gif" do
+    page.attach_file('video', 'spec/resources/grasshopper_test.mp4')
+    click_button("Upload!")
+    expect(File.exist?(temp_input_path)).to be_true
+    File.delete(temp_output_path)
   end
 
 end
