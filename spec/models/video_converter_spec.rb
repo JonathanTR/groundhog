@@ -35,4 +35,11 @@ describe "VideoConverter" do
     gif = FFMPEG::Movie.new(temp_output_path)
     expect(video.resolution).to eq(gif.resolution)
   end
+
+  it "should produce a valid gif file" do
+    VideoConverter.copy_to_temp_input(temp_input_path, video_path)
+    VideoConverter.convert_to_gif(temp_output_path, temp_input_path)
+    gif = FFMPEG::Movie.new(temp_output_path)
+    expect(gif.valid?).to be_true
+  end
 end
