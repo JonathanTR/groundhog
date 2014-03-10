@@ -12,11 +12,11 @@ post '/upload' do
     erb :error_406
   else
     file_source = params["video"][:tempfile]
-    video_name = params["video"][:filename]
+    filename = params["video"][:filename]
     start = params["start-time"].to_i
     duration = params["end-time"].to_i - start
-    video_title = strip_filetype(video_name)
-    target_path = "public/temp_video/#{video_name}"
+    video_title = strip_filetype(filename)
+    target_path = "public/temp_video/#{filename}"
     gif_path = "public/temp_gif/#{video_title}.gif"
     VideoConverter.copy_to_temp_video(target_path, file_source.path)
     VideoConverter.convert_to_gif(gif_path, target_path, start, duration)
