@@ -14,10 +14,9 @@ The upload route does more than it really should right now. It posts a video fil
 From there, the gif's path is passed to the user in a downloads page.
 
 ### To run locally:
-Fork the repo.
-`$ git clone <forked_repository_name>`
-`$ bundle install`
-Then run:
+Fork the repo, then
+`$ git clone <forked_repository_name>`, then
+`$ bundle install`, then run:
 `shotgun groundhog_app.rb`
 
 #### Commits
