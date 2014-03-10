@@ -21,6 +21,7 @@ post '/upload' do
     VideoConverter.copy_to_temp_video(target_path, video_file.path)
     VideoConverter.convert_to_gif(gif_path, target_path, start, duration)
     @gif_path = gif_path.gsub!("public/", "")
+    @gif_title = "#{video_title}.gif"
     erb :download
   end
 end
