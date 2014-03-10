@@ -20,7 +20,8 @@ post '/upload' do
     gif_path = "public/temp_gif/#{video_title}.gif"
     VideoConverter.copy_to_temp_video(target_path, video_file.path)
     VideoConverter.convert_to_gif(gif_path, target_path, start, duration)
-    redirect '/'
+    @gif_path = gif_path.gsub!("public/", "")
+    erb :download
   end
 end
 
