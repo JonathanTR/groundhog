@@ -26,6 +26,9 @@ var runValidations = function(){
         e.preventDefault()
         displayError("Please choose a time span that is greater than zero.")
         break
+      default:
+        $(".error").remove()
+        $("input[type='submit']").after("<progress>")
     }
   })
 }
