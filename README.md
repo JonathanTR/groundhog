@@ -4,7 +4,7 @@ Groundhog is a Sinatra app that converts your videos to gifs so you can experien
 
 ### Dependencies:
 streamio-ffmpeg gem
-[a link](https://github.com/streamio/streamio-ffmpeg )
+[streamio-ffmpeg gem](https://github.com/streamio/streamio-ffmpeg )
 
 ### How it works:
 The real workhorse here is ffmpeg, which is nicely wrapped in Streamio's streamio-ffmpeg gem. At the moment, there are only two routes: one to get the home page, and one to upload a file.
@@ -14,15 +14,14 @@ The upload route does more than it really should right now. It posts a video fil
 From there, the gif's path is passed to the user in a downloads page.
 
 ### To run locally:
-Fork the repo.
-`$ git clone <forked_repository_name>`
-`$ bundle install`
-Then run:
+Fork the repo, then
+`$ git clone <forked_repository_name>`, then
+`$ bundle install`, then run:
 `shotgun groundhog_app.rb`
 
 #### Commits
 
-Commits are tagged with a ticket code from a trello board I put together for the project: [a link](https://trello.com/b/adBaKvdJ/wistia-gif-converter).
+Commits are tagged with a ticket code from a trello board I put together for the project: [Groundhog](https://trello.com/b/adBaKvdJ/wistia-gif-converter).
 
 The number (ie 02) represents a user story, while the letter (ie -b) represents a goal inside that user story.
 
