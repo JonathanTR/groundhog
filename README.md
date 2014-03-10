@@ -27,4 +27,5 @@ The number (ie 02) represents a user story, while the letter (ie -b) represents 
 
 ### Some Bill Murray for you:
 This image was created with groundhog.
+<br/>
 ![Groundhog's Day](http://i.minus.com/ibrcrAqRoxhfAV.gif)
