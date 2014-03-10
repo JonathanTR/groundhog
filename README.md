@@ -26,4 +26,5 @@ Commits are tagged with a ticket code from a trello board I put together for the
 The number (ie 02) represents a user story, while the letter (ie -b) represents a goal inside that user story.
 
 ### Some Bill Murray for you:
-![Groundhog's Day](http://img.pandawhale.com/post-38185-dont-drive-angry-gif-Bill-Murr-du2W.gif)
+This image was created with groundhog.
+![Groundhog's Day](http://min.us/i/brcrAqRoxhfAV)
