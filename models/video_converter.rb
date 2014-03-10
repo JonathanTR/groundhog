@@ -2,7 +2,7 @@ require 'streamio-ffmpeg'
 
 class VideoConverter
 
-  def self.copy_to_temp_input(target_path, file_path)
+  def self.copy_to_temp_video(target_path, file_path)
     File.open(target_path, 'w'){|f| f.write File.read(file_path)}
   end
 
