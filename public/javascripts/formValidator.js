@@ -6,7 +6,7 @@ var fileNotPresent = function(){
 var timeSpanIsNilOrNegative = function(){
   var $start = $('input[name="start-time"]').val()
   var $end = $('input[name="end-time"]').val()
-  return $start >= $end
+  return parseInt($start) >= parseInt($end)
 }
 
 var displayError = function(errorMessage){
