@@ -13,11 +13,13 @@ post '/upload' do
   else
     video_file = params["video"][:tempfile]
     video_name = params["video"][:filename]
+    start = params["start-time"].to_i
+    duration = params["end-time"].to_i - start
     video_title = strip_filetype(video_name)
     target_path = "public/temp_video/#{video_name}"
     gif_path = "public/temp_gif/#{video_title}.gif"
     VideoConverter.copy_to_temp_video(target_path, video_file.path)
-    VideoConverter.convert_to_gif(gif_path, target_path)
+    VideoConverter.convert_to_gif(gif_path, target_path, start, duration)
     redirect '/'
   end
 end
