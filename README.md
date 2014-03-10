@@ -3,8 +3,9 @@
 Groundhog is a Sinatra app that converts your videos to gifs so you can experience those few seconds over and over and over and over and ov...
 
 ### Dependencies:
-streamio-ffmpeg gem
+This app uses the
 [streamio-ffmpeg gem](https://github.com/streamio/streamio-ffmpeg )
+as a wrapper for ffmpeg.
 
 ### How it works:
 The real workhorse here is ffmpeg, which is nicely wrapped in Streamio's streamio-ffmpeg gem. At the moment, there are only two routes: one to get the home page, and one to upload a file.
@@ -14,9 +15,9 @@ The upload route does more than it really should right now. It posts a video fil
 From there, the gif's path is passed to the user in a downloads page.
 
 ### To run locally:
-Fork the repo, then
-`$ git clone <forked_repository_name>`, then
-`$ bundle install`, then run:
+Fork the repo, then<br/>
+`$ git clone <forked_repository_name>`, then<br/>
+`$ bundle install`, then run:<br/>
 `shotgun groundhog_app.rb`
 
 #### Commits
