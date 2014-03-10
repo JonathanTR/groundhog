@@ -49,4 +49,10 @@ feature "User clicks upload" do
     expect(page).to have_selector("img[src='temp_gif/grasshopper_test.gif']")
   end
 
+  scenario "the user should be redirected to a download page" do
+    page.attach_file('video', 'spec/resources/grasshopper_test.mp4')
+    click_button("Make a gif!")
+    expect(page).to have_selector("a[href='temp_gif/grasshopper_test.gif']")
+  end
+
 end
