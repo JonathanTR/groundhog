@@ -27,4 +27,12 @@ describe "VideoConverter" do
     VideoConverter.convert_to_gif(temp_output_path, temp_input_path)
     expect(File.exist?(temp_output_path)).to be_true
   end
+
+  it "should produce a gif with the same resolution by default" do
+    VideoConverter.copy_to_temp_input(temp_input_path, video_path)
+    VideoConverter.convert_to_gif(temp_output_path, temp_input_path)
+    video = FFMPEG::Movie.new(temp_input_path)
+    gif = FFMPEG::Movie.new(temp_output_path)
+    expect(video.resolution).to eq(gif.resolution)
+  end
 end
