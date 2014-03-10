@@ -11,7 +11,7 @@ var timeSpanIsNilOrNegative = function(){
 
 var displayError = function(errorMessage){
   $(".error").remove()
-  $("#video-uploader").before("<div class='error'>" + errorMessage + "</div>")
+  $("input[type='submit']").after("<div class='error'>" + errorMessage + "</div>")
 }
 
 var runValidations = function(){
