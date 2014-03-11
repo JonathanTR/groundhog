@@ -6,7 +6,7 @@ var fileNotPresent = function(){
 var timeSpanIsNilOrNegative = function(){
   var $start = $('input[name="start-time"]').val()
   var $end = $('input[name="end-time"]').val()
-  return parseInt($start) >= parseInt($end)
+  return $start == "" || $end == "" || parseInt($start) >= parseInt($end)
 }
 
 var displayError = function(errorMessage){
@@ -14,17 +14,28 @@ var displayError = function(errorMessage){
   $("input[type='submit']").after("<div class='error'>" + errorMessage + "</div>")
 }
 
-var runValidations = function(){
-  var $form = $("#video-uploader")
-  $form.on("submit", function(e){
+var runUploadValidations = function(){
+  var $uploadForm = $("#video-uploader")
+  $uploadForm.on("submit", function(e){
     switch(true){
       case fileNotPresent():
         e.preventDefault()
         displayError("Please choose a file to upload.")
         break
+      default:
+        $(".error").remove()
+        $("input[type='submit']").after("<progress>")
+    }
+  })
+}
+
+var runGifConvertValidations = function(){
+  var $convertGifForm = $("#gif-converter")
+  $convertGifForm.on("submit", function(e){
+    switch(true){
       case timeSpanIsNilOrNegative():
         e.preventDefault()
-        displayError("Please choose a time span that is greater than zero.")
+        displayError("Please choose a valid start and end time.")
         break
       default:
         $(".error").remove()
@@ -34,5 +45,6 @@ var runValidations = function(){
 }
 
 $(document).ready(function(){
-  runValidations()
+  runUploadValidations()
+  runGifConvertValidations()
 })

@@ -22,12 +22,4 @@ describe "Root path", :type => :feature do
     expect(page).to have_css('input[type="submit"]')
   end
 
-  it "should have a field for a start point" do
-    expect(page).to have_css('input[name="start-time"]')
-  end
-
-  it "should have a field for an end point" do
-    expect(page).to have_css('input[name="end-time"]')
-  end
-
 end
