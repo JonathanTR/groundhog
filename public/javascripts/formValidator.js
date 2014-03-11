@@ -6,7 +6,7 @@ var fileNotPresent = function(){
 var timeSpanIsNilOrNegative = function(){
   var $start = $('input[name="start-time"]').val()
   var $end = $('input[name="end-time"]').val()
-  return parseInt($start) >= parseInt($end)
+  return $start == "" || $end == "" || parseInt($start) >= parseInt($end)
 }
 
 var displayError = function(errorMessage){
@@ -36,7 +36,7 @@ var runGifConvertValidations = function(){
     switch(true){
       case timeSpanIsNilOrNegative():
         e.preventDefault()
-        displayError("Please choose a time span that is greater than zero.")
+        displayError("Please choose a valid start and end time.")
         break
       default:
         $(".error").remove()
