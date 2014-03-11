@@ -19,7 +19,8 @@ video {
   margin-bottom: 2em; }
 
 progress {
-  margin: 0 2em; }
+  display: block;
+  margin: 0 auto; }
 
 .container {
   -webkit-box-shadow: 0px 2px 4px 0px rgba(50, 50, 50, 0.25);
