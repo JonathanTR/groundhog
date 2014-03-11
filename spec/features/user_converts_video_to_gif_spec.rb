@@ -10,6 +10,11 @@ feature "User creates a gif" do
     click_button("Upload!")
   end
 
+  scenario "form on display page should access '/convert' route" do
+    expect(page).to have_selector("form[method='post']")
+    expect(page).to have_selector("form[action='/convert']")
+  end
+
   xscenario "the file should be converted to a gif" do
     expect(File.exist?(temp_video_path)).to be_true
     File.delete(temp_gif_path)
