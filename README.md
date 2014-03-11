@@ -20,29 +20,36 @@ post '/upload' do
     erb :error_406
   else
     file_source = params["video"][:tempfile]
-    filename = params["video"][:filename]
-    video_storage_path = "public/temp_video/#{filename}"
+    @filename = params["video"][:filename]
+    video_storage_path = "public/temp_video/#{@filename}"
     VideoConverter.copy_to_temp_video(video_storage_path, file_source.path)
-
-    gif_storage_path = "public/temp_gif/#{strip_filetype(filename)}.gif"
-    gif_start_point = params["start-time"].to_i
-    gif_duration = params["end-time"].to_i - gif_start_point
-    VideoConverter.convert_to_gif(gif_storage_path, video_storage_path, gif_start_point, gif_duration)
-
-    @gif_path = gif_storage_path.gsub!("public/", "")
-    @gif_title = "#{strip_filetype(filename)}.gif"
-    erb :download
+    @video_storage_link = strip_public_folder(video_storage_path)
+    erb :preview
   end
+end
+
+post '/convert' do
+  filename = params["filename"]
+  video_storage_path = "public/temp_video/#{filename}"
+  gif_storage_path = "public/temp_gif/#{strip_filetype(filename)}.gif"
+  gif_start_point = params["start-time"].to_i
+  gif_duration = params["end-time"].to_i - gif_start_point
+  VideoConverter.convert_to_gif(gif_storage_path, video_storage_path, gif_start_point, gif_duration)
+
+  @gif_path = gif_storage_path.gsub!("public/", "")
+  @gif_title = "#{strip_filetype(filename)}.gif"
+  erb :download
 end
 ```
 
 The upload process begins with a validation on the filetype uploaded. If it hasn't been whitelisted, it shouldn't go any further.
 
-`file_source` refers to a tempfile created upon upload. To keep things easy to work with, it gets copied to the `temp_storage` folder. In a future release, this should be sent back to the user to preview.
+`file_source` refers to a tempfile created upon upload. To keep things easy to work with, it gets copied to the `temp_video` folder. When this is copied, the user is directed to a preview page where they can review their video, and choose start and end points for their gif.
 
-The next four lines run the gif conversion. At the moment, it takes for arguments, a path where the new gif will be stored, a path for the source video, a point to start recording the gif, and a total duration for the gif.
+When the form with those start and end points is submitted, the '/convert' route runs a `convert_to_gif` method from the `Video` class, copying that gif into a `temp_gif` folder.
 
-After that, the gif in the `temp_gif` folder is linked to in a download template for the user. In a future release, I envision setting a session when the user visits the page, and destroying the temp files when the session expires.
+A future feature will actually delete those files once the user leaves the page.
+
 
 ### To run locally:
 Fork the repo, then<br/>
