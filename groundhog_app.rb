@@ -11,17 +11,18 @@ post '/upload' do
     status 406
     erb :error_406
   else
-    video_file = params["video"][:tempfile]
-    video_name = params["video"][:filename]
-    start = params["start-time"].to_i
-    duration = params["end-time"].to_i - start
-    video_title = strip_filetype(video_name)
-    target_path = "public/temp_video/#{video_name}"
-    gif_path = "public/temp_gif/#{video_title}.gif"
-    VideoConverter.copy_to_temp_video(target_path, video_file.path)
-    VideoConverter.convert_to_gif(gif_path, target_path, start, duration)
-    @gif_path = gif_path.gsub!("public/", "")
-    @gif_title = "#{video_title}.gif"
+    file_source = params["video"][:tempfile]
+    filename = params["video"][:filename]
+    video_storage_path = "public/temp_video/#{filename}"
+    VideoConverter.copy_to_temp_video(video_storage_path, file_source.path)
+
+    gif_storage_path = "public/temp_gif/#{strip_filetype(filename)}.gif"
+    gif_start_point = params["start-time"].to_i
+    gif_duration = params["end-time"].to_i - gif_start_point
+    VideoConverter.convert_to_gif(gif_storage_path, video_storage_path, gif_start_point, gif_duration)
+
+    @gif_path = gif_storage_path.gsub!("public/", "")
+    @gif_title = "#{strip_filetype(filename)}.gif"
     erb :download
   end
 end
