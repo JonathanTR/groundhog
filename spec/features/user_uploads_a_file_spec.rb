@@ -36,7 +36,12 @@ feature "User clicks upload" do
     File.delete(temp_video_path)
   end
 
-  scenario "the file should be converted to a gif" do
+  scenario "user should see a video preview page" do
+    page.attach_file('video', 'spec/resources/grasshopper_test.mp4')
+    click_button("Make a gif!")
+    expect(page).to have_selector("video")
+  end
+
     page.attach_file('video', 'spec/resources/grasshopper_test.mp4')
     click_button("Make a gif!")
     expect(File.exist?(temp_video_path)).to be_true

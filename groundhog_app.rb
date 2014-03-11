@@ -15,6 +15,7 @@ post '/upload' do
     filename = params["video"][:filename]
     video_storage_path = "public/temp_video/#{filename}"
     VideoConverter.copy_to_temp_video(video_storage_path, file_source.path)
+    erb :preview
 
     gif_storage_path = "public/temp_gif/#{strip_filetype(filename)}.gif"
     gif_start_point = params["start-time"].to_i
