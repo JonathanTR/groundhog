@@ -16,13 +16,14 @@ feature "User creates a gif" do
   end
 
   scenario "form on display page should access '/convert' route" do
-    expect(page).to have_selector("form[method='post']")
     expect(page).to have_selector("form[action='/convert']")
   end
 
-  xscenario "the file should be converted to a gif" do
-    expect(File.exist?(temp_video_path)).to be_true
-    File.delete(temp_gif_path)
+  scenario "the file should be converted to a gif" do
+    fill_in("start-time", :with => 5)
+    fill_in("end-time", :with => 8)
+    click_button("Make a gif!")
+    expect(File.exist?(temp_gif_path)).to be_true
   end
 
   xscenario "the user should be redirected to a download page" do

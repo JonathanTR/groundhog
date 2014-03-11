@@ -20,10 +20,13 @@ post '/upload' do
   end
 end
 
-    gif_storage_path = "public/temp_gif/#{strip_filetype(filename)}.gif"
-    gif_start_point = params["start-time"].to_i
-    gif_duration = params["end-time"].to_i - gif_start_point
-    VideoConverter.convert_to_gif(gif_storage_path, video_storage_path, gif_start_point, gif_duration)
+post '/convert' do
+  filename = params["filename"]
+  video_storage_path = "public/temp_video/#{filename}"
+  gif_storage_path = "public/temp_gif/#{strip_filetype(filename)}.gif"
+  gif_start_point = params["start-time"].to_i
+  gif_duration = params["end-time"].to_i - gif_start_point
+  VideoConverter.convert_to_gif(gif_storage_path, video_storage_path, gif_start_point, gif_duration)
 
     @gif_path = gif_storage_path.gsub!("public/", "")
     @gif_title = "#{strip_filetype(filename)}.gif"
