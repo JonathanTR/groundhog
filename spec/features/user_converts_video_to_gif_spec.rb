@@ -26,12 +26,14 @@ feature "User creates a gif" do
     expect(File.exist?(temp_gif_path)).to be_true
   end
 
-  xscenario "the user should be redirected to a download page" do
+  scenario "the user should be redirected to a download page" do
+    fill_in("start-time", :with => 5)
+    fill_in("end-time", :with => 8)
     click_button("Make a gif!")
     expect(page).to have_selector("img[src='temp_gif/grasshopper_test.gif']")
   end
 
-  xscenario "the user should be redirected to a download page" do
+  scenario "the user should be redirected to a download page" do
     click_button("Make a gif!")
     expect(page).to have_selector("a[href='temp_gif/grasshopper_test.gif']")
   end
