@@ -1,10 +1,33 @@
 @import url(http://fonts.googleapis.com/css?family=Montserrat:400,700);
 
 // Colors
-$background-color: #FFFFFF;
-$accent-color: #3498DB;
+$background-main-color: #ECEEF1;
+$background-accent-color: #3498DB;
+$standout-block-color: #FFFFFF;
 $text-main-color: #272722;
 $text-secondary-color: #ECF0F1;
 
 // Fonts
 $text-main-font: "Montserrat", Helvetica, Sans-Serif;
+
+// Base Rules:
+body {
+  background-color: $background-main-color;
+  font-size: 16px;
+  font-family: $text-main-font;
+  color: $text-main-color;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+}
+
+// Layout Rules:
+.container {
+  width: 80%;
+  margin: 2em auto;
+  padding: 2em;
+  border-radius: 2.5px;
+  border-top: 0.5em solid $background-accent-color;
+  background-color: $standout-block-color;
+}
