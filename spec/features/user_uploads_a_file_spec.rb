@@ -31,7 +31,6 @@ feature "User clicks upload" do
   scenario "the file should be saved to a temp_video folder" do
     page.attach_file('video', 'spec/resources/grasshopper_test.mp4')
     click_button("Make a gif!")
-    puts temp_video_path
     expect(File.exist?(temp_video_path)).to be_true
     File.delete(temp_video_path)
   end
