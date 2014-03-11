@@ -38,7 +38,7 @@ feature "User clicks upload" do
   scenario "user should see a video preview page" do
     page.attach_file('video', 'spec/resources/grasshopper_test.mp4')
     click_button("Make a gif!")
-    expect(page).to have_selector("video")
+    expect(page).to have_selector("video[src='temp_video/grasshopper_test.mp4']")
   end
 
     page.attach_file('video', 'spec/resources/grasshopper_test.mp4')
