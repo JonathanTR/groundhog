@@ -30,7 +30,6 @@ var runUploadValidations = function(){
 }
 
 var runGifConvertValidations = function(){
-  console.log("run gif validations")
   var $convertGifForm = $("#gif-converter")
   $convertGifForm.on("submit", function(e){
     switch(true){
