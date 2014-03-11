@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 feature "User creates a gif" do
+  let(:temp_video_path){"public/temp_video/grasshopper_test.mp4"}
+  let(:temp_gif_path){"public/temp_gif/grasshopper_test.gif"}
 
   before :each do
     visit '/'
