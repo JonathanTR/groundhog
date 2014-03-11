@@ -42,12 +42,13 @@ progress {
 
 // Layout Rules:
 .container {
-  width: 80%;
+  width: 60%;
   margin: 2em auto;
   padding: 2em;
   border-radius: 2.5px;
   border-top: 0.5em solid $background-accent-color;
   background-color: $standout-block-color;
+  text-align: center;
 }
 
 // Module Rules:
