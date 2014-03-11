@@ -33,3 +33,7 @@ private
 def strip_filetype(path)
   path.gsub(/\.[a-z\d]{3,4}$/, "")
 end
+
+def strip_public_folder(path)
+  path.gsub("public/", "")
+end
