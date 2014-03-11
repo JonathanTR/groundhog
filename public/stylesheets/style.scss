@@ -6,6 +6,14 @@
   box-shadow:         0px 2px 4px 0px rgba(50, 50, 50, 0.25);
 }
 
+@mixin transition($property, $time, $timing) {
+  -webkit-transition: $property $time $timing;
+  -moz-transition: $property $time $timing;
+  -ms-transition: $property $time $timing;
+  -o-transition: $property $time $timing;
+  transition: $property $time $timing;
+}
+
 // Colors
 $background-main-color: #ECEEF1;
 $background-accent-color: #3498DB;
@@ -61,10 +69,16 @@ progress {
 // Module Rules:
 input[type=submit]{
   display: inline-block;
-  background-color: $action-color;
+  padding: 0.5em;
   border: none;
   border-radius: 2.5px;
+  background-color: $action-color;
+  font-size: 1.2em;
   color: white;
+  &:hover {
+    @include transition(background-color, 0.25s, ease);
+    background-color: lighten($action-color, 5%)
+  }
 }
 
 .controls {
