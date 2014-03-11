@@ -1,1 +1,7 @@
 <video src="<%= @video_storage_link %>" controls>
+<form id="gif-converter" method="post" enctype="multipart/form-data">
+  <label>Start Time (seconds)</label>
+  <input type="number" name="start-time">
+  <label>End Time (seconds)</label>
+  <input type="number" name="end-time">
+</form>
