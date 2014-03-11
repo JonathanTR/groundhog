@@ -34,7 +34,7 @@ progress {
   background-color: white;
   text-align: center; }
 
-input[type=submit] {
+input[type=submit], .download {
   display: inline-block;
   padding: 0.5em;
   border: none;
@@ -42,7 +42,7 @@ input[type=submit] {
   background-color: #2ecc71;
   font-size: 1.2em;
   color: white; }
-  input[type=submit]:hover {
+  input[type=submit]:hover, .download:hover {
     -webkit-transition: background-color 0.25s ease;
     -moz-transition: background-color 0.25s ease;
     -ms-transition: background-color 0.25s ease;

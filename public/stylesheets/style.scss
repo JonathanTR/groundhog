@@ -90,3 +90,7 @@ input[type=submit]{
     display: inline-block
   }
 }
+
+.download {
+  @extend input[type=submit]
+}
