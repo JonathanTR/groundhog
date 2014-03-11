@@ -40,3 +40,13 @@ a {
   border-top: 0.5em solid $background-accent-color;
   background-color: $standout-block-color;
 }
+
+// Module Rules:
+
+input[type=submit]{
+  display: inline-block;
+  background-color: $action-color;
+  border: none;
+  border-radius: 2.5px;
+  color: white;
+}

@@ -22,3 +22,10 @@ a {
   border-radius: 2.5px;
   border-top: 0.5em solid #3498db;
   background-color: white; }
+
+input[type=submit] {
+  display: inline-block;
+  background-color: #2ecc71;
+  border: none;
+  border-radius: 2.5px;
+  color: white; }
