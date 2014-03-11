@@ -35,3 +35,8 @@ input[type=submit] {
   border: none;
   border-radius: 2.5px;
   color: white; }
+
+.controls label {
+  display: block; }
+.controls input {
+  display: inline-block; }

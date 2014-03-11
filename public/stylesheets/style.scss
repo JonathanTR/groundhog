@@ -58,3 +58,12 @@ input[type=submit]{
   border-radius: 2.5px;
   color: white;
 }
+
+.controls {
+  label {
+    display: block;
+  }
+  input {
+    display: inline-block
+  }
+}
