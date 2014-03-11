@@ -53,6 +53,12 @@ feature "User clicks upload" do
     expect(page).to have_selector("input[name='end-time']")
   end
 
+  scenario "preview page should have a 'Make a gif!' button" do
+    page.attach_file('video', 'spec/resources/grasshopper_test.mp4')
+    click_button("Upload!")
+    expect(page).to have_selector("input[value='Make a gif!']")
+  end
+
     page.attach_file('video', 'spec/resources/grasshopper_test.mp4')
     click_button("Make a gif!")
     expect(File.exist?(temp_video_path)).to be_true
