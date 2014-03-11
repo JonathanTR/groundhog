@@ -10,6 +10,11 @@ feature "User creates a gif" do
     click_button("Upload!")
   end
 
+  after :each do
+    File.delete(temp_video_path) if File.exist?(temp_video_path)
+    File.delete(temp_gif_path) if File.exist?(temp_gif_path)
+  end
+
   scenario "form on display page should access '/convert' route" do
     expect(page).to have_selector("form[method='post']")
     expect(page).to have_selector("form[action='/convert']")
