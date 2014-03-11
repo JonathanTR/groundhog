@@ -13,14 +13,16 @@ post '/upload' do
   else
     file_source = params["video"][:tempfile]
     filename = params["video"][:filename]
-    gif_start_point = params["start-time"].to_i
-    gif_duration = params["end-time"].to_i - gif_start_point
     video_title = strip_filetype(filename)
     video_storage_path = "public/temp_video/#{filename}"
-    gif_storage_path = "public/temp_gif/#{video_title}.gif"
     VideoConverter.copy_to_temp_video(video_storage_path, file_source.path)
+
+    gif_storage_path = "public/temp_gif/#{video_title}.gif"
+    gif_start_point = params["start-time"].to_i
+    gif_duration = params["end-time"].to_i - gif_start_point
     VideoConverter.convert_to_gif(gif_storage_path, video_storage_path, gif_start_point, gif_duration)
-    @gif_storage_path = gif_storage_path.gsub!("public/", "")
+
+    @gif_path = gif_storage_path.gsub!("public/", "")
     @gif_title = "#{video_title}.gif"
     erb :download
   end
