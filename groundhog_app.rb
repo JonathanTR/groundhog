@@ -40,9 +40,10 @@ post '/convert' do
 end
 
 delete '/destroy/:filename' do
-  filename = params[:filename]
-  File.delete("public/temp_video/#{strip_filetype(filename)}.mp4")
-  File.delete("public/temp_gif/#{filename}")
+  filename = session[:filename]
+  filetype = session[:type]
+  File.delete("public/temp_video/#{filename}.#{filetype}")
+  File.delete("public/temp_gif/#{filename}.gif")
   "complete"
 end
 
