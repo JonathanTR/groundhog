@@ -70,15 +70,17 @@ destroyFiles = function(){
 ```
 
 ```Ruby
-delete '/destroy/:filename' do
-  filename = params[:filename]
-  File.delete("public/temp_video/#{strip_filetype(filename)}.mp4")
-  File.delete("public/temp_gif/#{filename}")
+delete '/destroy' do
+  filename = session[:filename]
+  filetype = session[:type]
+  File.delete("public/temp_video/#{filename}.#{filetype}")
+  File.delete("public/temp_gif/#{filename}.gif")
+  session.clear
   "complete"
 end
 ```
 
-When the user leaves, an ajax call is triggered, sending the filename back to a '/destroy' route, which deletes the files.
+When the user leaves, an ajax call to the '/destroy' route is called. This method deletes the files and clears the session.
 
 
 ### To run locally:
