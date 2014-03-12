@@ -33,6 +33,13 @@ post '/convert' do
   erb :download
 end
 
+delete '/destroy/:filename' do
+  filename = params[:filename]
+  File.delete("public/temp_video/#{strip_filetype(filename)}.mp4")
+  File.delete("public/temp_gif/#{filename}")
+  "complete"
+end
+
 private
 
 def strip_filetype(path)
