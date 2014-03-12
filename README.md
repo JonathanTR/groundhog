@@ -14,16 +14,18 @@ Here is a breakdown of that '/upload' route:
 
 ```Ruby
 post '/upload' do
-  filetype = params["video"][:type]
-  unless filetype.include?("/mp4")
+  file_source = params["video"][:tempfile].path
+  filetype = return_filetype(params["video"][:type])
+  filename = strip_filetype(params["video"][:filename])
+  session[:filename] = filename
+  session[:type] = filetype
+  unless ["mp4"].include?(filetype)
     status 406
     erb :error_406
   else
-    file_source = params["video"][:tempfile]
-    @filename = params["video"][:filename]
-    video_storage_path = "public/temp_video/#{@filename}"
-    VideoConverter.copy_to_temp_video(video_storage_path, file_source.path)
-    @video_storage_link = strip_public_folder(video_storage_path)
+    video_storage_path = "public/temp_video/#{filename}.#{filetype}"
+    VideoConverter.copy_to_temp_video(video_storage_path, file_source)
+    @video_storage_link = "temp_video/#{filename}.#{filetype}"
     erb :preview
   end
 end
@@ -31,20 +33,26 @@ end
 
 The upload process begins with a validation on the filetype uploaded. If it hasn't been whitelisted, it shouldn't go any further.
 
-`file_source` refers to a tempfile created upon upload. To keep things easy to work with, it gets copied to the `temp_video` folder. When this is copied, the user is directed to a preview page where they can review their video, and choose start and end points for their gif.
+Session variables are set for the `filename` and `filetype`, to track the file through the rest of the user's visit.
+
+`file_source` refers to a tempfile created upon upload. To keep things easy to work with, it gets copied to the `temp_video` folder.
+
+The user is then directed to a preview page where they can review their video, and choose start and end points for their gif.
 
 
 ```Ruby
 post '/convert' do
-  filename = params["filename"]
-  video_storage_path = "public/temp_video/#{filename}"
-  gif_storage_path = "public/temp_gif/#{strip_filetype(filename)}.gif"
+  filename = session[:filename]
+  filetype = session[:type]
+
+  video_storage_path = "public/temp_video/#{filename}.#{filetype}"
+  gif_storage_path = "public/temp_gif/#{filename}.gif"
   gif_start_point = params["start-time"].to_i
   gif_duration = params["end-time"].to_i - gif_start_point
   VideoConverter.convert_to_gif(gif_storage_path, video_storage_path, gif_start_point, gif_duration)
 
-  @gif_path = gif_storage_path.gsub!("public/", "")
-  @gif_title = "#{strip_filetype(filename)}.gif"
+  @gif_path = "temp_gif/#{filename}.gif"
+  @gif_title = "#{filename}.gif"
   erb :download
 end
 ```
