@@ -44,6 +44,7 @@ delete '/destroy' do
   filetype = session[:type]
   File.delete("public/temp_video/#{filename}.#{filetype}")
   File.delete("public/temp_gif/#{filename}.gif")
+  session.clear
   "complete"
 end
 
