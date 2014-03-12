@@ -39,7 +39,7 @@ post '/convert' do
   erb :download
 end
 
-delete '/destroy/:filename' do
+delete '/destroy' do
   filename = session[:filename]
   filetype = session[:type]
   File.delete("public/temp_video/#{filename}.#{filetype}")

@@ -1,7 +1,6 @@
 destroyFiles = function(){
-  $filename = $('#filename').html()
   $.ajax({
-    url: '/destroy/' + $filename,
+    url: '/destroy',
     type: 'delete'
   })
 }
