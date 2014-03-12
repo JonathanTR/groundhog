@@ -13,6 +13,7 @@ post '/upload' do
   filename = strip_filetype(params["video"][:filename])
   session[:filename] = filename
   session[:type] = filetype
+  unless ["mp4"].include?(filetype)
     status 406
     erb :error_406
   else
