@@ -25,15 +25,17 @@ post '/upload' do
 end
 
 post '/convert' do
-  filename = params["filename"]
-  video_storage_path = "public/temp_video/#{filename}"
-  gif_storage_path = "public/temp_gif/#{strip_filetype(filename)}.gif"
+  filename = session[:filename]
+  filetype = session[:type]
+
+  video_storage_path = "public/temp_video/#{filename}.#{filetype}"
+  gif_storage_path = "public/temp_gif/#{filename}.gif"
   gif_start_point = params["start-time"].to_i
   gif_duration = params["end-time"].to_i - gif_start_point
   VideoConverter.convert_to_gif(gif_storage_path, video_storage_path, gif_start_point, gif_duration)
 
-  @gif_path = gif_storage_path.gsub!("public/", "")
-  @gif_title = "#{strip_filetype(filename)}.gif"
+  @gif_path = "temp_gif/#{filename}.gif"
+  @gif_title = "#{filename}.gif"
   erb :download
 end
 
