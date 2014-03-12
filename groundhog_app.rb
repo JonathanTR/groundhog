@@ -8,16 +8,17 @@ get '/' do
 end
 
 post '/upload' do
-  filetype = params["video"][:type]
-  unless filetype.include?("/mp4")
+  file_source = params["video"][:tempfile].path
+  filetype = return_filetype(params["video"][:type])
+  filename = strip_filetype(params["video"][:filename])
+  session[:filename] = filename
+  session[:type] = filetype
     status 406
     erb :error_406
   else
-    file_source = params["video"][:tempfile]
-    @filename = params["video"][:filename]
-    video_storage_path = "public/temp_video/#{@filename}"
-    VideoConverter.copy_to_temp_video(video_storage_path, file_source.path)
-    @video_storage_link = strip_public_folder(video_storage_path)
+    video_storage_path = "public/temp_video/#{filename}.#{filetype}"
+    VideoConverter.copy_to_temp_video(video_storage_path, file_source)
+    @video_storage_link = "temp_video/#{filename}.#{filetype}"
     erb :preview
   end
 end
