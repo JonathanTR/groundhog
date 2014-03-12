@@ -27,7 +27,14 @@ post '/upload' do
     erb :preview
   end
 end
+```
 
+The upload process begins with a validation on the filetype uploaded. If it hasn't been whitelisted, it shouldn't go any further.
+
+`file_source` refers to a tempfile created upon upload. To keep things easy to work with, it gets copied to the `temp_video` folder. When this is copied, the user is directed to a preview page where they can review their video, and choose start and end points for their gif.
+
+
+```Ruby
 post '/convert' do
   filename = params["filename"]
   video_storage_path = "public/temp_video/#{filename}"
@@ -42,13 +49,28 @@ post '/convert' do
 end
 ```
 
-The upload process begins with a validation on the filetype uploaded. If it hasn't been whitelisted, it shouldn't go any further.
-
-`file_source` refers to a tempfile created upon upload. To keep things easy to work with, it gets copied to the `temp_video` folder. When this is copied, the user is directed to a preview page where they can review their video, and choose start and end points for their gif.
-
 When the form with those start and end points is submitted, the '/convert' route runs a `convert_to_gif` method from the `Video` class, copying that gif into a `temp_gif` folder.
 
-A future feature will actually delete those files once the user leaves the page.
+```JavaScript
+destroyFiles = function(){
+  $filename = $('#filename').html()
+  $.ajax({
+    url: '/destroy/' + $filename,
+    type: 'delete'
+  })
+}
+```
+
+```Ruby
+delete '/destroy/:filename' do
+  filename = params[:filename]
+  File.delete("public/temp_video/#{strip_filetype(filename)}.mp4")
+  File.delete("public/temp_gif/#{filename}")
+  "complete"
+end
+```
+
+When the user leaves, an ajax call is triggered, sending the filename back to a '/destroy' route, which deletes the files.
 
 
 ### To run locally:
