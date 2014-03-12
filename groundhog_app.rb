@@ -56,7 +56,3 @@ end
 def return_filetype(path)
   path[/(?<=\/)[a-z\d]{3,4}$/]
 end
-
-def strip_public_folder(path)
-  path.gsub("public/", "")
-end
