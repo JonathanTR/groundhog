@@ -1,6 +1,8 @@
 require 'sinatra'
 require_relative 'models/init'
 
+enable :sessions
+
 get '/' do
   erb :index
 end
